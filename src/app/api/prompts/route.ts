@@ -23,7 +23,7 @@ const promptSchema = z.object({
 });
 
 // Create prompt
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   try {
     const session = await auth();
     if (!session?.user) {
@@ -139,7 +139,7 @@ export async function POST(request: Request) {
 }
 
 // List prompts (for API access)
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<Response> {
   try {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");

@@ -214,7 +214,13 @@ async function buildAuthConfig() {
 }
 
 // Export auth handlers
-const authConfig = await buildAuthConfig();
+let authConfig;
+try {
+  authConfig = await buildAuthConfig();
+} catch (error) {
+  console.error("Failed to build auth config:", error);
+  throw error;
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authConfig);
 
